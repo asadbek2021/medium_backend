@@ -4,7 +4,8 @@
   "description": "Artificial backend for Medium",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon -r dotenv/config src/server.ts"
+    "dev": "nodemon -r dotenv/config src/server.ts",
+    "build": "tsc "
   },
   "repository": {
     "type": "git",

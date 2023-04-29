@@ -1,9 +1,11 @@
 import {DataTypes} from 'sequelize';
+
 import { sequelize } from "../../loaders";
+import { User } from './user';
 
 
 
-export const UserModel = sequelize.define('user', {
+export const UserModel = User.init({
     id: {
         type: DataTypes.INTEGER,
         unique: true,
@@ -25,4 +27,4 @@ export const UserModel = sequelize.define('user', {
             isInt: true
         },
     },
-}, {timestamps: false})
+}, {sequelize, modelName: 'user', createdAt: false, updatedAt: false})

@@ -1,5 +1,6 @@
-import * as express from 'express';
-import * as jwt from 'jsonwebtoken';
+import { Request,Response, NextFunction} from 'express';
+import jwt from 'jsonwebtoken';
+
 import * as Config from '../config';
 import { UserModel } from '../entities/user';
 import { HttpError } from '../utils';
@@ -9,14 +10,16 @@ type Payload = {
     id: string
 }
 
-export async function authMiddleware(req: express.Request, res: express.Response, next: express.NextFunction){
+
+export async function authMiddleware(req: Request, res: Response, next: NextFunction){
     const token = (req.headers['authorization'] || '').replace('Bearer ', '');
     try{
         const payload = getVerifiedToken(token, Config.JWT_SECRET);
-        const user = await UserModel.findOne({where:{id: +payload['id']}});
+        const user = await UserModel.findOne({where: { id: +payload['id'] }});
         if(user == null) {
             throw new HttpError(401, {message: 'Non-authorized request'});
         }
+        req.user = user;
         next();
     } catch(err){
         next(err);

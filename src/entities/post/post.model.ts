@@ -1,9 +1,11 @@
 import {DataTypes} from 'sequelize';
+
 import { sequelize } from "../../loaders";
+import { Post } from './post';
 
 
 
-export const PostModel = sequelize.define('post', {
+export const PostModel = Post.init({
     id: {
         type: DataTypes.INTEGER,
         unique: true,
@@ -19,7 +21,10 @@ export const PostModel = sequelize.define('post', {
     content: {
         type: DataTypes.STRING,
         validate: {
-            len: [30, 400],
+            len: [40, 400],
         },
+    },
+    authorId: {
+        type: DataTypes.INTEGER
     }
-}, {timestamps: true})
+}, {modelName: 'post', sequelize, updatedAt: true, createdAt: true})

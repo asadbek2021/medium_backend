@@ -16,3 +16,4 @@ export class HttpError extends Error {
 }
 
 export * from './logger';
+export * from './validation';

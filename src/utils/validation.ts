@@ -12,8 +12,6 @@ export const USER_SCHEMA = joi.object({
 });
 
 export const POST_SCHEMA = joi.object({
-    title: joi.string()
-        .length(20).max(34)
-        .required(),
-    content: joi.string().min(40).max(400).required(),
+    title: joi.string().max(100).min(10).required(),
+    content: joi.string().min(1000).max(100000).required(),
 });

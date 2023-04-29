@@ -1,5 +1,6 @@
 import {Request, Response, NextFunction} from 'express';
 import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
 
 import * as Config from '../../config';
 import { UserModel } from '../user';
@@ -23,10 +24,14 @@ export class AuthService {
             await validateUser(email, password);
             const user = await UserModel.findOne({where:{ email }});
             if(user == null){
-                throw new HttpError(400, {message: 'User doesn\'t exist'})
+                throw new HttpError(400, {message: "User doesn't exist"})
+            }
+            const isLegit = await bcrypt.compare(password, user.password.toString());
+            if(!isLegit){
+                throw new HttpError(400, {message: "Invalid password or email"})
             }
             const token = generateToken({id: user.id}, Config.JWT_SECRET)
-            res.status(200).send({message: 'Singned in successfully!', token});
+            res.status(200).send({message: "Singned in successfully!", token});
         } catch(error) {
             next(error);
         }
@@ -40,15 +45,22 @@ export class AuthService {
             if(user != null){
                 throw new HttpError(400, {message: 'User already exists'})
             }
-            const newUser =  await UserModel.create({email, password})
-            res.status(201).send({message: 'Signed up successfully!' ,user: newUser});
+            const hashedPass = await bcrypt.hash(password, 10);
+            const newUser =  await UserModel.create({email, password: hashedPass});
+            res.status(201).send({
+                message: 'Signed up successfully!' ,
+                user: {
+                    id: newUser.id, 
+                    email: newUser.email 
+                }
+            });
         } catch(error) {
             next(error);
         }
     }
 }
 
-async function validateUser(email: string, password: number | string) {
+async function validateUser(email: string, password: string) {
     try{
        await USER_SCHEMA.validateAsync({email, password})
     } catch(error) {

@@ -9,9 +9,10 @@ export async function setRelations(logger: Logger) {
     
     UserModel.hasMany(PostModel, {
         foreignKey: 'authorId',
-        sourceKey: 'id'
     })
-    PostModel.belongsTo(UserModel);
+    PostModel.belongsTo(UserModel, {
+        foreignKey: 'authorId',
+    });
     relationsLogger.debug('Relations build successfully')
    } catch(error) {
         throw new Error(error);

@@ -19,6 +19,7 @@ export async function authMiddleware(req: Request, res: Response, next: NextFunc
         if(user == null) {
             throw new HttpError(401, {message: 'Non-authorized request'});
         }
+        // @ts-ignore
         req.user = user;
         next();
     } catch(err){

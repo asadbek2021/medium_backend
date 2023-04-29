@@ -9,7 +9,8 @@ export const sequelize = new Sequelize({
     dialect: 'sqlite',
     port: Config.DB.PORT,
     username: Config.DB.USERNAME,
-    password: Config.DB.PASSWORD
+    password: Config.DB.PASSWORD,
+    logging: false
 })
 
 

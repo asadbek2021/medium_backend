@@ -21,10 +21,7 @@ export const UserModel = User.init({
         }
     },
     password: {
-        type: DataTypes.NUMBER,
-        validate: {
-            len: [6, 14],
-            isInt: true
-        },
+        type: DataTypes.STRING,
+        allowNull: false,
     },
 }, {sequelize, modelName: 'user', createdAt: false, updatedAt: false})

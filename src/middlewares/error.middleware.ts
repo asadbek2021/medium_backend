@@ -24,7 +24,7 @@ export function errorMiddleware(error: ErrorType, req: Request, res: Response, n
     }
     if(error instanceof ValidationError){
         logger.error(error);
-        res.status(400).send({message: error.message, details: error.details});
+        res.status(400).send({message: error.message});
         return;
     }
     logger.error(error);

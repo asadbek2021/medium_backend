@@ -10,3 +10,4 @@ export const DB = {
 }
 
 export const LOG_LEVEL = process.env.LOG_LEVEL || 'debug';
+export const JWT_SECRET = process.env.JWT_SECRET || '';

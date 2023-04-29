@@ -5,9 +5,10 @@ import { sequelize } from "../../loaders";
 
 export const PostModel = sequelize.define('post', {
     id: {
-        type: DataTypes.NUMBER,
+        type: DataTypes.INTEGER,
         unique: true,
-        autoIncrement: true
+        autoIncrement: true,
+        primaryKey: true
     },
     title: {
         type: DataTypes.STRING,

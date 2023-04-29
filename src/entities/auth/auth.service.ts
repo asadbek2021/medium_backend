@@ -1,7 +1,6 @@
 import {Request, Response, NextFunction} from 'express';
 import { UserModel } from '../user';
 
-const USERS_PER_PAGE = 12;
 
 type RequestWithQuery = Request & {
     body?: {

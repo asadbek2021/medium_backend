@@ -5,9 +5,10 @@ import { sequelize } from "../../loaders";
 
 export const UserModel = sequelize.define('user', {
     id: {
-        type: DataTypes.NUMBER,
+        type: DataTypes.INTEGER,
         unique: true,
-        autoIncrement: true
+        autoIncrement: true,
+        primaryKey: true
     },
     email: {
         type: DataTypes.STRING,

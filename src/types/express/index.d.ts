@@ -1,6 +1,6 @@
-import { User } from "../../entities/user";
+import { User } from '../../entities/user';
 
-export {}
+export {};
 
 declare global {
   namespace Express {

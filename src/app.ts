@@ -8,14 +8,15 @@ import { AuthRouter } from './entities/auth';
 import { logger } from './utils';
 import { logMiddleware, authMiddleware, errorMiddleware } from './middlewares';
 
-
 const app = express();
 
 connectAndInitDB(logger);
 
-app.use(cors({
-    origin: '*', 
-}))
+app.use(
+  cors({
+    origin: '*',
+  })
+);
 app.use(express.json());
 
 app.use(logMiddleware);
@@ -28,6 +29,5 @@ app.use('/post', PostRouter);
 app.use('/user', UserRouter);
 
 app.use(errorMiddleware);
-
 
 export default app;

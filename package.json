@@ -6,8 +6,9 @@
   "scripts": {
     "dev": "nodemon -r dotenv/config src/server.ts",
     "lint": "eslint --ext .ts .",
-    "format": "prettier --ignore-path .gitignore --write \"**/*.+(ts)\"",
-    "build": "tsc "
+    "pretty": "prettier --write \"src/**/*.ts\"",
+    "build": "tsc ",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -41,9 +42,18 @@
     "@typescript-eslint/eslint-plugin": "^5.59.1",
     "@typescript-eslint/parser": "^5.59.1",
     "eslint": "^8.39.0",
+    "eslint-config-prettier": "^8.8.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.3",
     "nodemon": "^2.0.22",
     "prettier": "^2.8.8",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.4"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "eslint",
+      "prettier"
+    ]
   }
 }

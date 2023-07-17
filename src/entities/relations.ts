@@ -11,8 +11,8 @@ export async function setRelations(logger: Logger) {
     PostModel.belongsTo(UserModel, {
       foreignKey: 'authorId',
     });
-    relationsLogger.debug('Relations build successfully');
+    relationsLogger.debug('Relations build successfully')
   } catch (error) {
-    throw new Error(error);
-  }
+    throw new Error(error)
+  }    
 }
